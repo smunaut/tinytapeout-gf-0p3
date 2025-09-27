@@ -69,35 +69,6 @@ jobs:
           pdk_version: ${{ env.SKY130_PDK_VERSION }}
           pdk_root: ${{ env.PDK_ROOT }}
 
-      # Patch all digital projects to work around the poly density issue
-      - name: Patch projects for poly density issue
-        working-directory: projects
-        run: |
-          for project in tt_um_*; do
-            if [ "$project" = "tt_um_chip_rom" ]; then
-              continue
-            fi
-
-            # Skip projects that were not built with OpenLane2 or LibreLane (e.g. analog and mixed-signal projects)
-            if [[ "$(jq -r '.openlane_version' $project/commit_id.json)" != "OpenLane2 2"* ]] && \
-               [[ "$(jq -r '.flow_version' $project/commit_id.json)" != "OpenLane2 2"* ]] && \
-               [[ "$(jq -r '.flow_version' $project/commit_id.json)" != "LibreLane "* ]]; then
-              continue
-            fi
-
-            if [ -f $project/$project.gds.br ]; then
-              brotli -jd $project/$project.gds.br
-            fi
-            
-            if [ -f $project/$project.gds ]; then
-              python ../sky130_density_fix/replace_decap.py --design $project --user-gds $project/$project.gds --replacement-gds ../sky130_density_fix/sky130_ef_sc_hd__newfill_12.gds -p 0.57 | tee -a ../tt-multiplexer/ol2/tt_top/gds/replace_decap.log
-            fi
-
-            if [ -f $project/$project.oas ]; then
-              python ../sky130_density_fix/replace_decap.py --design $project --user-gds $project/$project.oas --replacement-gds ../sky130_density_fix/sky130_ef_sc_hd__newfill_12.gds -p 0.57 | tee -a ../tt-multiplexer/ol2/tt_top/gds/replace_decap.log
-            fi
-          done
-
       # Use LibreLane to build the macros and the final GDS
       - name: Harden Chip ROM
         run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python -m librelane tt/rom/config.json"
