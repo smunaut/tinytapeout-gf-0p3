@@ -89,7 +89,7 @@ jobs:
           GDS_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           for gds_file in $GDS_FILES; do
-            nix-shell --run "python precheck.py --gds ${{ github.workspace }}/${gds_file}"
+            nix-shell --run "python precheck.py --gds ${{ github.workspace }}/${gds_file} --tech gf180mcuD"
           done
 
       - name: Test Summary
