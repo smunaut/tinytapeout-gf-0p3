@@ -52,6 +52,10 @@ jobs:
           path: librelane
           ref: ${{ env.LIBRELANE_TAG }}
 
+      - name: Copy multiplexer configuration (temporary)
+        run: |
+          cp gf180mcuD.yaml tt-multiplexer/cfg
+
       - name: Update caravel configuration
         run: python ./tt/configure.py --update-shuttle
 

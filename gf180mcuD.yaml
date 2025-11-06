@@ -1,0 +1,89 @@
+pdk:
+  name: 'gf180mcuD'
+  tech: 'gf180mcu'
+  die:
+    width:  3880000
+    height: 5070000
+    margin:
+      left:   425000
+      right:  425000
+      top:    425000
+      bottom: 425000
+  site:
+    width:  560
+    height: 3920
+  pwrgate:
+    vdd:
+      name: tt_pg_3v3
+      width: 11200
+    vaa:
+      name: tt_pg_5v0
+      width: 14560
+  tracks:
+    Metal1:
+      x:
+        offset: 0
+        pitch:  560
+        width:  230
+      y:
+        offset: 0
+        pitch:  560
+        width:  230
+    Metal2:
+      x:
+        offset: 0
+        pitch:  560
+        width:  280
+      y:
+        offset: 0
+        pitch:  560
+        width:  280
+    Metal3:
+      x:
+        offset: 0
+        pitch:  560
+        width:  280
+      y:
+        offset: 0
+        pitch:  560
+        width:  280
+    Metal4:
+      x:
+        offset: 0
+        pitch:  560
+        width:  280
+      y:
+        offset: 0
+        pitch:  560
+        width:  280
+    Metal5:
+      x:
+        offset: 0
+        pitch:  900
+        width:  440
+      y:
+        offset: 0
+        pitch:  900
+        width:  440
+tt:
+  grid:     # In number of blocks
+    x:  8   # Must be divisible by 4
+    y: 20   # Must be EVEN
+  block:
+    w: -1
+    h: -1
+  margin:   # In 'sites'
+    x: 6
+    y: 1
+  uio:
+    ae: 16
+    au:  8
+    i:  10
+    o:   8
+    io:  8
+  spine:
+    vlayer: 'Metal4'
+    hlayer: 'Metal3'
+  analog: []
+  logo:
+    size: 100000
