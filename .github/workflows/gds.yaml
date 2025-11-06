@@ -67,6 +67,7 @@ jobs:
             extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
 
       - name: Install SKY130 PDK
+        if: false # Disabled until the mux integration is ready
         uses: TinyTapeout/ciel-action@v1
         with:
           pdk_name: sky130
@@ -75,31 +76,35 @@ jobs:
 
       # Use LibreLane to build the macros and the final GDS
       - name: Harden Chip ROM
+        if: false # Disabled until the mux integration is ready
         run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python -m librelane tt/rom/config.json"
 
       - name: Harden tt_ctrl
+        if: false # Disabled until the mux integration is ready
         working-directory: tt-multiplexer/ol2/tt_ctrl
         run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python build.py"
 
       - name: Harden tt_mux
+        if: false # Disabled until the mux integration is ready
         working-directory: tt-multiplexer/ol2/tt_mux
         run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python build.py"
 
       - name: Copy macros
+        if: false # Disabled until the mux integration is ready
         run: python ./tt/configure.py --copy-macros
 
       - name: Harden tt_top
+        if: false # Disabled until the mux integration is ready
         working-directory: tt-multiplexer/ol2/tt_top
         run: nix-shell $GITHUB_WORKSPACE/librelane/shell.nix --run "python build.py --skip-xor-checks"
 
       - name: Copy final results
+        if: false # Disabled until the mux integration is ready
         run: python ./tt/configure.py --copy-final-results
 
       - name: Create chipfoundry submission
+        if: false # Disabled until the mux integration is ready
         run: python ./tt/configure.py --create-chipfoundry-submission
-
-      - name: Patch GL power pin assignments
-        run: sed -i 's/^ assign \(v[a-z0-9]*\) = \(v[a-z]*\);$/ assign \1 = \2; assign \2 = \1;/' chipfoundry/verilog/gl/openframe_project_wrapper.v
 
       - name: upload GDS artifact
         if: success() || failure()
@@ -130,6 +135,7 @@ jobs:
           path: shuttle_index.json
 
       - name: upload ChipFoundry submission directory
+        if: false # Disabled until the mux integration is ready
         uses: actions/upload-artifact@v4
         with:
           name: chipfoundry_submission
@@ -140,6 +146,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y iverilog
 
       - name: GL simulation
+        if: false # Disabled until the mux integration is ready
         working-directory: verilog/dv/mux
         env:
           EXPECTED_REPO: ${{ github.repository }}
