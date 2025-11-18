@@ -80,8 +80,8 @@ jobs:
       - name: Copy final results
         run: python ./tt/configure.py --copy-final-results
 
-      - name: Create chipfoundry submission
-        run: python ./tt/configure.py --create-chipfoundry-submission
+      - name: Create foundry submission directory
+        run: python ./tt/configure.py --create-foundry-submission
 
       - name: upload GDS artifact
         if: success() || failure()
@@ -111,11 +111,11 @@ jobs:
           name: shuttle_index
           path: shuttle_index.json
 
-      - name: upload ChipFoundry submission directory
+      - name: upload foundry submission directory
         uses: actions/upload-artifact@v4
         with:
-          name: chipfoundry_submission
-          path: chipfoundry
+          name: foundry_submission
+          path: foundry_submission
 
       # Install iverilog (required for GL simulation)
       - name: install iverilog
