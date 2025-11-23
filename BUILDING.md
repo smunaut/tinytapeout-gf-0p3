@@ -33,6 +33,15 @@ Run the following commands to generate the configuration for building Tiny Tapeo
 python tt/configure.py --update-shuttle
 ```
 
+## Wafer.space id macro files
+
+Run the following commands to download the required macro files from wafer.space:
+
+```bash
+wget -O tt-multiplexer/ol2/tt_top/gds/gf180mcu_ws_ip__id.gds https://raw.githubusercontent.com/wafer-space/gf180mcu-project-template/refs/heads/main/ip/gf180mcu_ws_ip__id/gds/gf180mcu_ws_ip__id.gds
+wget -O tt-multiplexer/ol2/tt_top/lef/gf180mcu_ws_ip__id.lef https://raw.githubusercontent.com/wafer-space/gf180mcu-project-template/refs/heads/main/ip/gf180mcu_ws_ip__id/lef/gf180mcu_ws_ip__id.lef
+```
+
 ## Harden
 
 ```bash
