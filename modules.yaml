@@ -6,6 +6,20 @@ modules:
   - name: 'factory_test' # Factory test module, address 1
     mux_id: 0
     blk_id: 1
+  # Lock to have high current pins short as possible
+  - name: 'tnt_gf_555'
+    mux_id: 3
+    blk_id: 7
+    width: 1
+    height: 2
+    pg_vaa: true
+    analog:
+      0: 6
+      1: 7
+      2: 11
+      3: 10
+      4: 9
+      5: 8
   # Art containing modules that needs to be carefully placed so they don't get flipped/mirrored:
   - name: 'oscillating_bones'
     mux_id: 9
