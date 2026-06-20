@@ -40,3 +40,9 @@ modules:
       3: null
       4: null
     pg_vaa: false
+  # Pin 256x8 SRAM at mux address 256
+  - name: essen
+    mux_id: 8
+    blk_id: 0
+    width: 1
+    height: 2
